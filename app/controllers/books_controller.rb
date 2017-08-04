@@ -1,11 +1,17 @@
 class BooksController < ApplicationController
   before_action :find_book, only: %i[show update edit destroy]
   def index
-    @books = Book.all.order('created_at DESC')
+    if params[:category].blank?
+      @books = Book.all.order('created_at DESC')
+    else
+      @category_id = Category.find_by(name: params[:category]).id
+      @books = Book.where(category_id: @category_id)
+    end
   end
 
   def new
-    @book = current_user.books.build# Book.new
+    @book = current_user.books.build # Book.new
+    # @catigories = Category.all.map { |e| [e.name, e.id] }
   end
 
   def show
@@ -39,7 +45,7 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :author, :desc)
+    params.require(:book).permit(:title, :author, :desc, :book_cover, :category_id)
   end
 
   def find_book
