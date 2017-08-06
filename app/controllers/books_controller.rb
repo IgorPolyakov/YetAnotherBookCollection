@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
   before_action :find_book, only: %i[show update edit destroy]
+  before_action :authenticate_user!, only: %i[new edit]
   def index
     if params[:category].blank?
       @books = Book.all.order('created_at DESC')
