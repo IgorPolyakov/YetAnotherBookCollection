@@ -2,11 +2,21 @@ class BooksController < ApplicationController
   before_action :find_book, only: %i[show update edit destroy]
   before_action :authenticate_user!, only: %i[new edit]
   def index
-    if params[:category].blank?
-      @books = Book.all.order('created_at DESC')
-    else
+    # if params[:category].blank?
+    #   @books = Book.all.order('created_at DESC')
+    # elsif params[:search].has_value?
+    #   @books = Book.first#Book.find_by(name: params[:search])
+    # else
+    #   @category_id = Category.find_by(name: params[:category]).id
+    #   @books = Book.where(category_id: @category_id)
+    # end
+    if params[:search].present?
+      @books = Book.all.find_by(title: params[:search])
+    elsif params[:category].present?
       @category_id = Category.find_by(name: params[:category]).id
       @books = Book.where(category_id: @category_id)
+    else
+      @books = Book.all.order('created_at DESC')
     end
   end
 

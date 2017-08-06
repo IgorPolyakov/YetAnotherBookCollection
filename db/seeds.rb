@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Category.delete_all
+list = %w(Science Satire Drama Romance Mystery Horror Health Guide Travel History Math Anthology Poetry Encyclopedias Dictionaries Comics Art Cookbooks Diaries Journals Series Trilogy Biographies Autobiographies Fantasy)
+list.each { |item| Category.create!(name: item) }
+
+# list.each { |item| puts item }

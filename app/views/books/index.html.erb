@@ -1,6 +1,8 @@
+<% if params[:category].present? %>
 <h1 class="current-category"><%= params[:category] %></h1>
+<% end %>
 <% if @books.count == 0 %>
-<h1>There are no books currently in this category</h1>
+<h1>There are no books</h1>
 <% else %>
 <div class="row">
   <% @books.each do |book| %>
