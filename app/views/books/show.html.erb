@@ -1,29 +1,36 @@
 <div class="row">
   <div class="col-lg-9">
-    <h1><%= @book.title %>
-      <small><%= @book.author %></small>
-    </h1>
-    <h2>
-      <small>Category:
-      </small>
-      <%= @book.category.name %>
-    </h2>
-    <div class="well well-sm">
-      <%= @book.desc %>
+    <% if @book.is_privat? %>
+      <h1><span class="label label-warning">Private</span> <%= @book.title %>
+    <% else %>
+      <h1><%= @book.title %>
+    <% end %>
+        <small><%= @book.author %></small>
+      </h1>
+      <h2>
+        <small>Category:
+        </small>
+        <%= @book.category.name %>
+      </h2>
+      <div class="well well-sm">
+        <%= @book.desc %>
+      </div>
+    </div>
+    <div class="col-lg-3">
+      <%= image_tag @book.book_cover.url(:cover) %>
+      <br>
+      <% if user_signed_in? %>
+      <% if @book.user_id == current_user.id %>
+      <div class="btn-group links center-block">
+        <%= link_to "Edit", edit_book_path(@book), class: "btn btn-custom btn-info" %>
+        <%= link_to "Delete", book_path(@book), method: :delete, data: {confirm: "Are you sure?" }, class: "btn btn-custom btn-danger" %>
+      </div>
+      <% end %>
+      <% end %>
     </div>
   </div>
-  <div class="col-lg-3">
-    <%= image_tag @book.book_cover.url(:cover) %>
+  <div class="">
+    <%= link_to "Add review", new_book_review_path(@book) %>
   </div>
-</div>
-<div class="">
-  <%= link_to "Add review", new_book_review_path(@book) %>
-</div>
-<%= render @book.reviews %>
-<% if user_signed_in? %>
-<% if @book.user_id == current_user.id %>
-<%= link_to "Edit", edit_book_path(@book) %>
-<%= link_to "Delete", book_path(@book), method: :delete, data: {confirm: "Are you sure?" } %>
-<% end %>
-<% end %>
-<%= link_to "Back", root_path %>
+  <%= render @book.reviews %>
+  <%= link_to "Back", root_path, class: "btn"%>

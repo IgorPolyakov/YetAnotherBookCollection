@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170804173327) do
+ActiveRecord::Schema.define(version: 20170806103954) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20170804173327) do
     t.string "book_cover_content_type"
     t.integer "book_cover_file_size"
     t.datetime "book_cover_updated_at"
+    t.boolean "is_privat"
   end
 
   create_table "categories", force: :cascade do |t|

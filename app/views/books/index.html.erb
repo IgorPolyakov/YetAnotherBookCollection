@@ -5,13 +5,31 @@
 <h1>There are no books</h1>
 <% else %>
 <div class="row">
+  <h1>Books
+    <small>privat</small>
+  </h1>
   <% @books.each do |book| %>
+    <% if (user_signed_in? && book.is_privat? && current_user.id == book.user_id) %>
+    <div class="col-md-3">
+      <a href="/books/<%= book.id %>">
+        <%= image_tag book.book_cover.url(:preview) %>
+      </a>
+    </div>
+    <% end %>
+  <% end %>
+</div>
+<div class="row">
+  <h1>Books
+    <small>public</small>
+  </h1>
+  <% @books.each do |book| %>
+  <% unless book.is_privat? %>
   <div class="col-md-3">
     <a href="/books/<%= book.id %>">
       <%= image_tag book.book_cover.url(:preview) %>
     </a>
   </div>
   <% end %>
+  <% end %>
 </div>
 <% end %>
-<%= link_to "Add Book", new_book_path %>
