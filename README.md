@@ -1,24 +1,17 @@
-# README
+# YetAnotherBookCollection Private
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Explotation:
 
-Things you may want to cover:
+* one
 
-* Ruby version
+* two
 
-* System dependencies
+* three
 
-* Configuration
+ToDo:
 
-* Database creation
+* bugs
 
-* Database initialization
+* docker
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* juri
