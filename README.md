@@ -1,17 +1,21 @@
 # YetAnotherBookCollection Private
 
-Explotation:
+[Explotation]:
 
-* one
+- [x] A4 – Нарушение контроля доступа
 
-* two
+- [x] A1 – Внедрение кода
 
-* three
+- [ ] A* –
 
 ToDo:
 
-* bugs
+- [ ] Bugs
 
-* docker
+- [ ] Docker
 
-* juri
+- [ ] Juri
+
+
+
+[Explotation]: https://habrahabr.ru/company/pentestit/blog/326272/
