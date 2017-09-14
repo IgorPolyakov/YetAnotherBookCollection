@@ -45,6 +45,11 @@ class BooksController < ApplicationController
     redirect_to root_path
   end
 
+  def download
+    # http://ryan.endacott.me/2014/06/10/rails-file-upload.html
+    @book.file_book    
+  end
+
   private
 
   def book_params
