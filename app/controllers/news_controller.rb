@@ -1,9 +1,13 @@
 class NewsController < ApplicationController
   def last
     # Book.find_by()
-    sql = 'SELECT * FROM "books"'
-    sql = "SELECT * FROM \"#{params[:search]}\"" if params[:search].present?
-    @records_array = ActiveRecord::Base.connection.execute(sql)
+    fast_query = 'SELECT * FROM'
+    if params[:search].present?
+      fast_query += "\"#{params[:search]}\""
+    else
+      fast_query += '"books"'
+    end
+    @records_array = ActiveRecord::Base.connection.execute(fast_query)
   end
 
   def search
