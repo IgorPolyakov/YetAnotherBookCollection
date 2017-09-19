@@ -38,8 +38,6 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    addressable (2.5.2)
-      public_suffix (>= 2.0.2, < 4.0)
     arel (8.0.0)
     autoprefixer-rails (7.1.3)
       execjs
@@ -50,15 +48,6 @@ GEM
       sass (>= 3.3.4)
     builder (3.2.3)
     byebug (9.1.0)
-    capybara (2.15.1)
-      addressable
-      mini_mime (>= 0.1.3)
-      nokogiri (>= 1.3.3)
-      rack (>= 1.0.0)
-      rack-test (>= 0.5.4)
-      xpath (~> 2.0)
-    childprocess (0.7.1)
-      ffi (~> 1.0, >= 1.0.11)
     climate_control (0.2.0)
     cocaine (0.5.8)
       climate_control (>= 0.0.3, < 1.0)
@@ -102,7 +91,6 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
     mimemagic (0.3.2)
-    mini_mime (0.1.4)
     mini_portile2 (2.2.0)
     minitest (5.10.3)
     multi_json (1.12.1)
@@ -117,7 +105,6 @@ GEM
       mime-types
       mimemagic (~> 0.3.0)
     pg (0.21.0)
-    public_suffix (3.0.0)
     puma (3.10.0)
     rack (2.0.3)
     rack-test (0.6.3)
@@ -153,7 +140,6 @@ GEM
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
     ruby_dep (1.5.0)
-    rubyzip (1.2.1)
     sass (3.5.1)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -165,9 +151,6 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
-    selenium-webdriver (3.5.1)
-      childprocess (~> 0.5)
-      rubyzip (~> 1.0)
     simple_form (3.5.0)
       actionpack (> 4, < 5.2)
       activemodel (> 4, < 5.2)
@@ -203,8 +186,6 @@ GEM
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
-    xpath (2.1.0)
-      nokogiri (~> 1.3)
 
 PLATFORMS
   ruby
@@ -212,7 +193,6 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-sass
   byebug
-  capybara (~> 2.13)
   coffee-rails (~> 4.2)
   devise
   jbuilder (~> 2.5)
@@ -223,7 +203,6 @@ DEPENDENCIES
   puma (~> 3.7)
   rails (~> 5.1.2)
   sass-rails (~> 5.0)
-  selenium-webdriver
   simple_form
   spring
   spring-watcher-listen (~> 2.0.0)
@@ -233,4 +212,4 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 BUNDLED WITH
-   1.15.4
+   1.16.0.pre.2
