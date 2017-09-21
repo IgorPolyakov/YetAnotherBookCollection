@@ -4,16 +4,16 @@ import os
 import requests
 import hashlib
 from sys import argv
-    #
-    # STATUS_CODE = {
-    #     'SUCCESS': 101,
-    #     'CORRUPT': 102,
-    #     'MUMBLE':  103,
-    #     'DOWN':    104
-    # }
-    #
+#
+# STATUS_CODE = {
+#     'SUCCESS': 101,
+#     'CORRUPT': 102,
+#     'MUMBLE':  103,
+#     'DOWN':    104
+# }
+#
 
-PORT="3000"
+PORT = "3000"
 
 
 def sha1(string):
@@ -28,65 +28,70 @@ def check(hostname):
         if response != 0:
             print("Host unreachable")
             return(104)
-        r = requests.get('http://'+hostname+':'+PORT)
+        r = requests.get('http://' + hostname + ':' + PORT)
         if "CTF is easy!" not in r.text:
             print("'CTF in easy' not found")
             return(104)
         return(101)
-    except:
+    except BaseException:
         return(104)
-
 
 
 def put(hostname, id, flag):
     try:
-        if check(hostname)==101:
+        if check(hostname) == 101:
 
-            'url = 'http://' + hostname + ':' + PORT
+            url = 'http://' + hostname + ':' + PORT
             login = id
             password = sha1('lalka' + id)
-            reg = {'utf8=%E2%9C%93',
-            'authenticity_token=HnEfL2xJXa4wc1gkO%2BO%2FpwowFhxmau6L98%2F3DhTw%2BS%2BrxUxqFYWtJgBlHgcbtXM5H5DedvhsBpA4Cswm%2B0lynA%3D%3D',
-            'user%5Bemail%5D='login,
-            'user%5Bpassword%5D=':password,
-            'user%5Bpassword_confirmation%5D=':password,
-            'commit=Sign+up'}
-            auth = {'login':login,
-                    'password':password}
-            add = {'title':'flag',
-                   'todo':flag}
+            reg = {'utf8':'%E2%9C%93',
+                   'authenticity_token': token,
+                   'user[email]': login,
+                   'user[password]': password,
+                   'user[password_confirmation]': password,
+                   'commit': 'Sign+up'}
+            auth = {'utf8':'%E2%9C%93',
+                   'authenticity_token': token,
+                   'user[email]': login,
+                   'user[password]': password,
+                   'user[remember_me]': 0,
+                   'commit': 'Log+in'}
+
+            add = {'title': 'flag',
+                   'todo': flag}
             s = requests.Session()
-            r = requests.post(url+'/users/sign_up', data=reg)
-            r = s.post(url+'/users/sign_in', data=auth);
+            r = requests.post(url + '/users/sign_up', data=reg)
+            r = s.post(url + '/users/sign_in', data=auth)
             cookies = s.cookies.get_dict()
-            r = s.post(url+'/list', cookies=cookies, data=add);
+            r = s.post(url + '/list', cookies=cookies, data=add)
             if flag in r.text:
                 return(101)
         else:
             print("Error 'check()'")
             return(104)
-    except:
+    except BaseException:
         print("Error 'try:'")
         return(104)
+
 
 def get(hostname, id, flag):
     try:
         url = 'http://' + hostname + ':' + PORT
         login = id
         password = sha1('osmfeAEFOMSPfpkaf' + id)
-        auth = {'login':login,
-                    'password':password}
-        add = {'title':'flag',
-                   'todo':flag}
+        auth = {'login': login,
+                'password': password}
+        add = {'title': 'flag',
+               'todo': flag}
         s = requests.Session()
-        r = s.post(url+'/signin', data=auth);
+        r = s.post(url + '/signin', data=auth)
         cookies = s.cookies.get_dict()
-        r = s.get(url+'/list', cookies=cookies);
+        r = s.get(url + '/list', cookies=cookies)
         if (add['title'] in r.text) and (add['todo'] in r.text):
             return(101)
         print("Flag is not found")
         return(104)
-    except:
+    except BaseException:
         print("Error 'try'")
         return(104)
 
