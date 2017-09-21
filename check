@@ -44,18 +44,18 @@ def put(hostname, id, flag):
             url = 'http://' + hostname + ':' + PORT
             login = id
             password = sha1('lalka' + id)
-            reg = {'utf8':'%E2%9C%93',
+            reg = {'utf8': '%E2%9C%93',
                    'authenticity_token': token,
                    'user[email]': login,
                    'user[password]': password,
                    'user[password_confirmation]': password,
                    'commit': 'Sign+up'}
-            auth = {'utf8':'%E2%9C%93',
-                   'authenticity_token': token,
-                   'user[email]': login,
-                   'user[password]': password,
-                   'user[remember_me]': 0,
-                   'commit': 'Log+in'}
+            auth = {'utf8': '%E2%9C%93',
+                    'authenticity_token': token,
+                    'user[email]': login,
+                    'user[password]': password,
+                    'user[remember_me]': 0,
+                    'commit': 'Log+in'}
 
             add = {'title': 'flag',
                    'todo': flag}
