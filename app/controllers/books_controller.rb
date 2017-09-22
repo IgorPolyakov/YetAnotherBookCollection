@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   before_action :find_book, only: %i[show update edit destroy]
-  before_action :authenticate_user!, only: %i[new edit]
+  before_action :authorize, only: %i[new edit]
   def index
     if params[:search].present?
       @books = Book.where('title LIKE ?', "%#{params[:search]}%")
@@ -47,7 +47,7 @@ class BooksController < ApplicationController
 
   def download
     # http://ryan.endacott.me/2014/06/10/rails-file-upload.html
-    @book.file_book    
+    @book.file_book
   end
 
   private

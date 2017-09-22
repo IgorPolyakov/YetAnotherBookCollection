@@ -19,7 +19,7 @@
     <div class="col-lg-3">
       <%= image_tag @book.book_cover.url(:cover) %>
       <br>
-      <% if user_signed_in? %>
+      <% if current_user %>
       <% if @book.user_id == current_user.id %>
       <div class="btn-group links center-block">
         <%= link_to "Edit", edit_book_path(@book), class: "btn btn-custom btn-info" %>
