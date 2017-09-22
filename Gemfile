@@ -6,7 +6,6 @@ git_source(:github) do |repo_name|
 end
 
 gem 'bootstrap-sass'
-gem 'devise'
 gem 'rails', '~> 5.1.3'
 gem 'simple_form'
 gem 'pg', '~> 0.18'
@@ -18,7 +17,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 gem 'paperclip'
 
 group :development, :test do
