@@ -20,7 +20,6 @@ gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'paperclip'
-gem 'activeadmin', github: 'activeadmin'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
