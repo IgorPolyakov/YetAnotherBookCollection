@@ -10,3 +10,4 @@ list = %w(Science Satire Drama Romance Mystery Horror Health Guide Travel Histor
 list.each { |item| Category.create!(name: item) }
 
 # list.each { |item| puts item }
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
