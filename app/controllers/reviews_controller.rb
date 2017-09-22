@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :find_book
-  before_action :authenticate_user!, only: %i[new edit]
+  before_action :authorize, only: %i[new edit]
   def new
     @review = Review.new
   end

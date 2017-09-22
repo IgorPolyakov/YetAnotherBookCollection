@@ -9,7 +9,7 @@
     <small>privat</small>
   </h1>
   <% @books.each do |book| %>
-    <% if (user_signed_in? && book.is_privat? && current_user.id == book.user_id) %>
+    <% if (current_user && book.is_privat? && current_user.id == book.user_id) %>
     <div class="col-md-3">
       <a href="/books/<%= book.id %>">
         <%= image_tag book.book_cover.url(:preview) %>
