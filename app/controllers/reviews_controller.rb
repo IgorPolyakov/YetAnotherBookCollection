@@ -9,7 +9,7 @@ class ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @review.book_id = @book.id
     @review.user_id = current_user.id
-
+    params[:review][:comment].to_sym # if params[:review][:comment].nil?
     if @review.save
       redirect_to book_path(@book)
     else
