@@ -6,7 +6,7 @@
 <% else %>
 <div class="row">
   <h1>Books
-    <small>privat</small>
+    <small>private</small>
   </h1>
   <% @books.each do |book| %>
     <% if (current_user && book.is_privat? && current_user.id == book.user_id) %>
