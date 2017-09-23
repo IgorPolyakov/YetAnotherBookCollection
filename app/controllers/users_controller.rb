@@ -11,6 +11,10 @@ class UsersController < ApplicationController
         redirect_to '/signup'
       end
     end
+    def admin
+      @books = Book.all
+      @users = User.all
+    end
     def user_params
       params[:user]
     end

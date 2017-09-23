@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   get '/logout' => 'sessions#destroy'
   get '/signup' => 'users#new'
   post '/users' => 'users#create'
-  get 'news/last'
-  get 'news/search'
+  get 'admin_panel'=> 'users#admin'
+  get '/news' => 'news#last'
   resources :books do
     resources :reviews
   end
