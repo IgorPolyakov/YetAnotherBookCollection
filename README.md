@@ -6,7 +6,7 @@
 
 - [x] A1 – Внедрение кода
 
-- [ ] A* –
+- [x] A* – [Mass Assignment]
 
 ToDo:
 
@@ -20,3 +20,4 @@ ToDo:
 
 
 [Explotation]: https://habrahabr.ru/company/pentestit/blog/326272/
+[Mass Assignment]: https://xakep.ru/2013/12/03/ruby-on-rails-safe-problem/#toc06.
