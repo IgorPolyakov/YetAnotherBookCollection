@@ -7,17 +7,17 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+def upload(name)
+  File.open(Rails.root + "db/#{name}.jpg")
+end
 Category.delete_all
 User.delete_all
 Book.delete_all
 list = %w[ Android Assembler C/C++ C# Database Java JavaScript Rust Other PHP Python Ruby Go Swift ]
 list.each { |item| Category.create!(name: item) }
 
-User.create(name: 'admin', email: 'ad@m.in', password: 'so_secyre', has_priveleges: true)
+User.create(name: FFaker::Name.name, email: FFaker::Internet.email, password: FFaker::Internet.password, has_priveleges: true)
 current_user = User.first.id
-def upload(name)
-  File.open(Rails.root + "db/#{name}.jpg")
-end
 Book.create(book_cover: upload('java'), category_id: Category.find_by(name: 'Java').id, user_id: current_user, title: 'Java 9 Cookbook', author: 'Mohamed Sanaulla, Nick Samoylov', desc: 'This cookbook offers a range of software development examples in simple and straightforward Java 9 code, providing step-by-step resources and time-saving methods to help you solve data problems efficiently.')
 Book.create(book_cover: upload('android'), category_id: Category.find_by(name: 'Android').id, user_id: current_user, title: 'Head First Android Development: A Brain-Friendly Guide, 2nd Edition', author: 'Dawn Griffiths, David Griffiths', desc: 'If you have an idea for a killer Android app, this fully revised and updated edition will help you build your first working application in a jiffy.')
 Book.create(book_cover: upload('rust'), category_id: Category.find_by(name: 'Rust').id, user_id: current_user, title: 'Programming Rust: Fast, Safe Systems Development', author: 'Jason Orendorff, Jim Blandy', desc: 'This practical book introduces systems programmers to Rust, the new and cutting-edge language that’s still in the experimental/lab stage.')

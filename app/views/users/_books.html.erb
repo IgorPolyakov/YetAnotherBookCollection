@@ -15,10 +15,10 @@
           <td><%= var['author'] %></td>
           <td><%= time_ago_in_words(var['updated_at']) %></td>
           <td>
-            <%= link_to "Edit", edit_book_path(@book), class: "btn btn-custom btn-info" %>
+            <%= link_to "Edit", edit_book_path(var), class: "btn btn-info" %>
           </td>
           <td>
-            <%= link_to "Delete", book_path(@book), method: :delete, data: {confirm: "Are you sure?" }, class: "btn btn-custom btn-danger" %>
+            <%= link_to "Delete", book_path(var), method: :delete, data: {confirm: "Are you sure?" }, class: "btn btn-danger" %>
           </td>
 
         </tr>

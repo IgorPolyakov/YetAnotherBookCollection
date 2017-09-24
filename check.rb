@@ -4,11 +4,8 @@
 require 'open-uri'
 require 'nokogiri'
 require 'net/http'
-# request['utf8':  '%E2%9C%93'
-# request['authenticity_token':  token
-# request['user[email]':  login
-# request['user[password]':  password
-# request['commit':  'Sign+up'
+require 'digest'
+require 'ffaker'
 
 def check
   page = Nokogiri::HTML(open('http://localhost:3000/'))
@@ -31,6 +28,7 @@ def register_user(email, password)
 
   form_data = {
     'authenticity_token': token,
+    'user[name]':  FFaker::Name.name,
     'user[email]':  email,
     'user[password]':  password,
     'user[has_priveleges]':  true,
@@ -83,5 +81,6 @@ def login_user(email, password)
   p response.body
 end
 
-register_user((rand * 1_000_000).to_i.to_s, '1')
+password = Digest::SHA1.hexdigest(rand.to_s)
+register_user(FFaker::Internet.email, password)
 # login_user('www', 'www')
