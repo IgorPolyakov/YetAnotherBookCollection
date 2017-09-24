@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ReviewsController < ApplicationController
   before_action :find_book
   before_action :authorize, only: %i[new edit]

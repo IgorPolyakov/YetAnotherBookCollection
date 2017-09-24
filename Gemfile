@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
@@ -6,19 +8,19 @@ git_source(:github) do |repo_name|
 end
 
 gem 'bootstrap-sass'
-gem 'rails', '~> 5.1.3'
-gem 'simple_form'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.7'
+gem 'rails', '~> 5.1.3'
 gem 'sass-rails', '~> 5.0'
+gem 'simple_form'
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
+gem 'bcrypt', '~> 3.1.7'
 gem 'coffee-rails', '~> 4.2'
-gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
-gem 'bcrypt', '~> 3.1.7'
 gem 'paperclip'
+gem 'turbolinks', '~> 5'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

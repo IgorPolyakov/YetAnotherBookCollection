@@ -11,9 +11,16 @@
       <div class="">
         <p>Password:</p> <%= password_field_tag :password %>
       </div>
-  </div>
-  <div class="panel-footer">
-    <%= submit_tag "Submit", class: "btn btn-default"  %>
-    <% end %>
+      <div class="">
+        <%= submit_tag "Submit", class: "btn btn-default"  %>
+      </div>
+      <% end %>
   </div>
 </div>
+
+
+<%= simple_form_for @user do |f| %>
+  <%= f.input :email %>
+  <%= f.input :password %>
+  <%= f.button :submit %>
+<% end %>

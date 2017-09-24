@@ -14,9 +14,16 @@
       <div class="">
         <p>Password:</p> <%= f.password_field :password, placeholder: :password %>
       </div>
+      <%= f.submit "Submit", class: "btn btn-default" %>
+      <% end %>
   </div>
   <div class="panel-footer">
-    <%= f.submit "Submit", class: "btn btn-default" %>
-    <% end %>
   </div>
 </div>
+
+<%= simple_form_for @user do |f| %>
+  <%= f.input :name %>
+  <%= f.input :email %>
+  <%= f.input :password %>
+  <%= f.button :submit %>
+<% end %>

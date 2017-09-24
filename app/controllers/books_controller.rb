@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BooksController < ApplicationController
   before_action :find_book, only: %i[show update edit destroy]
   before_action :authorize, only: %i[new edit]
