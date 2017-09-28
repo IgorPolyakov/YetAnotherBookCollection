@@ -1,27 +1,36 @@
 #!/usr/bin/env python3
 # JURU READEMR
 # , [26.09.17 21:03]
+from sys import argv
 from xvfbwrapper import Xvfb
 from selenium import webdriver
 from time import sleep
 from faker import Faker
+import hashlib
 fake = Faker()
 
-def check(ui_addr):
+OK, GET_ERROR, CORRUPT, FAIL, INTERNAL_ERROR = 101, 102, 103, 104, 110
+
+def check(argv):
     vdisplay = Xvfb()
     vdisplay.start()
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument('--no-sandbox')
     browser = webdriver.Chrome(chrome_options=chrome_options)
-    browser.get('http://{}:3000'.format(ui_addr))
+    browser.get('http://{}:3000'.format(argv))
     browser.set_window_size(1920, 1080)
-    # xpath('.navbar-brand')
-    if passbrowser.title == 'YetAnotherBookCollection':
-        return 101
+    browser.get_screenshot_as_file('/tmp/check.png')
+    if browser.title == 'YetAnotherBookCollection':
+        return (OK)
     else:
-        return 104
+        return (FAIL)
 
-def put(ui_addr, ui_email, ui_passwd, flag):
+def put(argv):
+    ui_addr     = argv[1]
+    user        = argv[2]
+    ui_flag     = argv[3]
+    ui_email    = user + '@somemail.com'
+    ui_passwd   = hashlib.sha224(user.encode('utf-8')).hexdigest()
     vdisplay = Xvfb()
     vdisplay.start()
     chrome_options = webdriver.ChromeOptions()
@@ -49,7 +58,11 @@ def put(ui_addr, ui_email, ui_passwd, flag):
 
     browser.get_screenshot_as_file('/tmp/put.png')
 
-def get(ui_addr, ui_email, ui_passwd):
+# def get(ui_addr, ui_email, ui_passwd):
+def get(argv):
+    ui_addr = argv[1]
+    ui_email = argv[2]
+    ui_passwd = argv[3]
     vdisplay = Xvfb()
     vdisplay.start()
     chrome_options = webdriver.ChromeOptions()
@@ -65,9 +78,21 @@ def get(ui_addr, ui_email, ui_passwd):
     flag = browser.find_element_by_xpath('/html/body/div/div[1]/div[1]/div/p').text
     print(flag)
 
-# check('localhost')
-ui_passwd = fake.password(length=10, special_chars=True, digits=True, upper_case=True, lower_case=True)
-ui_email = fake.email()
-flag = fake.credit_card_number(card_type=None)
-put('localhost', ui_email, ui_passwd, flag)
-get('localhost', ui_email, ui_passwd)
+# # check('localhost')
+# ui_passwd = fake.password(length=10, special_chars=True, digits=True, upper_case=True, lower_case=True)
+# ui_email = fake.email()
+# flag = fake.credit_card_number(card_type=None)
+# put('localhost', ui_email, ui_passwd, flag)
+# get('localhost', ui_email, ui_passwd)
+if __name__ == '__main__':
+    if len(argv) > 1:
+        if argv[1] == "check":
+            if len(argv) > 2:
+                exit(check(argv[2]))
+        elif argv[1] == "put":
+            if len(argv) > 4:
+                exit(put(argv[2], argv[3], argv[4]))
+        elif argv[1] == "get":
+            if len(argv) > 4:
+                exit(get(argv[2], argv[3], argv[4]))
+    exit(INTERNAL_ERROR)
