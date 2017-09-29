@@ -10,7 +10,11 @@ from faker import Faker
 import hashlib
 fake = Faker()
 
-OK, GET_ERROR, CORRUPT, FAIL, INTERNAL_ERROR = 101, 102, 103, 104, 110
+ERROR = 110
+SUCCESS =  101
+CORRUPT =  102
+MUMBLE =  103
+DOWN =  104
 
 def check(argv):
     vdisplay = Xvfb()
@@ -22,14 +26,11 @@ def check(argv):
     browser.set_window_size(1920, 1080)
     browser.get_screenshot_as_file('/tmp/check.png')
     if browser.title == 'YetAnotherBookCollection':
-        return (OK)
+        return (SUCCESS)
     else:
-        return (FAIL)
+        return (DOWN)
 
-def put(argv):
-    ui_addr     = argv[1]
-    user        = argv[2]
-    ui_flag     = argv[3]
+def put(ui_addr, user, ui_flag):
     ui_email    = user + '@somemail.com'
     ui_passwd   = hashlib.sha224(user.encode('utf-8')).hexdigest()
     vdisplay = Xvfb()
@@ -47,11 +48,12 @@ def put(argv):
         browser.find_element_by_xpath('//*[@id="user_password"]').send_keys(ui_passwd)
         browser.find_element_by_xpath('/html/body/div/div/div[2]/form/input[3]').click()
         browser.find_element_by_xpath('/html/body/nav /div/ul[2]/li[2]').click()
+        browser.get_screenshot_as_file('/tmp/try_put.png')
     except NoSuchElementException:
         return (CORRUPT)
     try:
         browser.find_element_by_xpath('//*[@id="book_title"]').send_keys(fake.catch_phrase())
-        browser.find_element_by_xpath('//*[@id="book_desc"]').send_keys("sibirctf:" + flag)
+        browser.find_element_by_xpath('//*[@id="book_desc"]').send_keys("sibirctf:" + ui_flag)
         browser.find_element_by_xpath('//*[@id="book_author"]').send_keys(fake.name_male())
         browser.find_element_by_xpath('/html/body/div/form/div[2]/select/option[3]').click()
         browser.find_element_by_xpath('//*[@id="book_book_cover"]').send_keys("/home/fox/Desktop/gen473_2654653.jpg")
@@ -59,14 +61,12 @@ def put(argv):
         browser.find_element_by_xpath('/html/body/div/form/input[3]').click()
     except NoSuchElementException:
         return (CORRUPT)
-    return (OK)
-    # browser.get_screenshot_as_file('/tmp/put.png')
+    return (SUCCESS)
 
 # def get(ui_addr, ui_email, ui_passwd):
-def get(argv):
-    ui_addr = argv[1]
-    ui_email = argv[2]
-    ui_passwd = argv[3]
+def get(ui_addr, user, ui_flag):
+    ui_email    = user + '@somemail.com'
+    ui_passwd   = hashlib.sha224(user.encode('utf-8')).hexdigest()
     vdisplay = Xvfb()
     vdisplay.start()
     chrome_options = webdriver.ChromeOptions()
@@ -74,20 +74,20 @@ def get(argv):
     browser = webdriver.Chrome(chrome_options=chrome_options)
     browser.get('http://{}:3000/login'.format(ui_addr))
     browser.set_window_size(1920, 1080)
-    browser.find_element_by_xpath('//*[@id="email"]').send_keys(ui_email)
-    browser.find_element_by_xpath('//*[@id="password"]').send_keys(ui_passwd)
-    browser.find_element_by_xpath('/html/body/div/div/div[2]/form/div[3]/input').click()
-    browser.find_element_by_xpath('/html/body/div/div[1]/div/a').click()
-    browser.get_screenshot_as_file('/tmp/get.png')
-    flag = browser.find_element_by_xpath('/html/body/div/div[1]/div[1]/div/p').text
-    print(flag)
+    try:
+        browser.find_element_by_xpath('//*[@id="email"]').send_keys(ui_email)
+        browser.find_element_by_xpath('//*[@id="password"]').send_keys(ui_passwd)
+        browser.find_element_by_xpath('/html/body/div/div/div[2]/form/div[3]/input').click()
+        browser.find_element_by_xpath('/html/body/div/div[1]/div/a').click()
+        browser.get_screenshot_as_file('/tmp/get.png')
+        flag = browser.find_element_by_xpath('/html/body/div/div[1]/div[1]/div/p').text
+    except NoSuchElementException:
+        return (CORRUPT)
+    if ('sibirctf:' + ui_flag) == flag:
+        return (SUCCESS)
+    else:
+        return (MUMBLE)
 
-# # check('localhost')
-# ui_passwd = fake.password(length=10, special_chars=True, digits=True, upper_case=True, lower_case=True)
-# ui_email = fake.email()
-# flag = fake.credit_card_number(card_type=None)
-# put('localhost', ui_email, ui_passwd, flag)
-# get('localhost', ui_email, ui_passwd)
 if __name__ == '__main__':
     if len(argv) > 1:
         if argv[1] == "check":

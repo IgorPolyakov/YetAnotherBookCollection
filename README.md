@@ -31,7 +31,7 @@ ToDo:
 
 - [x] Docker
 
-- [ ] Juri
+- [x] Juri
 
 Dependency:
 
