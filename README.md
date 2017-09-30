@@ -14,9 +14,18 @@ Install dependencies:
 ```
 apt-get update
 apt-get install ruby ruby-dev
+gem install bundler
 ```
 
+Run
+------------
+```
+RAILS_ENV=production bundle exec rake db:create db:schema:load db:seed DISABLE_DATABASE_ENVIRONMENT_CHECK=1
+RAILS_ENV=production bundle exec rake assets:precompile
+RAILS_ENV=production bundle exec rails server
+```
 [Explotation]:
+------------
 
 - [x] A4 – Нарушение контроля доступа
 
@@ -25,7 +34,7 @@ apt-get install ruby ruby-dev
 - [x] A* – [Mass Assignment]
 
 ToDo:
-
+------------
 - [ ] Bugs
   - [x] DOS - to_sym. Symbol — это особый тип данных в Ruby, являющийся, по сути, константой, при этом сами символы никогда не удаляются сборщиком мусора. Соответственно можно забить память пользовательским вводом.
 
@@ -34,7 +43,7 @@ ToDo:
 - [x] Juri
 
 Dependency:
-
+------------
 - Rails
 
 - ImageMagic
@@ -82,11 +91,11 @@ echo "TEST GET"
 Exit codes
 ----------
 ```
-110 - Need more arguments
-104 - Host unreachable
-103 - Bad answer
-102 - Flag not found
-101 - OK
+110 - ERROR
+104 - DOWN
+103 - MUMBLE
+102 - CORRUPT
+101 - SUCCESS
 ```
 
 License

@@ -82,5 +82,5 @@ test:
 production:
   <<: *default
   database: YetAnotherBookCollection_production
-  username: YetAnotherBookCollection
-  password: <%= ENV['YETANOTHERMESSAGEDASHBOARD_DATABASE_PASSWORD'] %>
+  username: yabc
+  password: pipka
